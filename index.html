@@ -37,13 +37,41 @@
             Deep Purple &amp; Cyberpunk Sunset – focus, temps &amp; notes.
           </p>
         </div>
-        <div class="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
-          <span
-            class="inline-flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.9)]"
-          ></span>
-          <span class="uppercase tracking-[0.18em] text-emerald-200/90">
-            Mode Focus
-          </span>
+        <div
+          class="flex items-center gap-3 text-xs sm:text-sm text-slate-200 relative"
+        >
+          <div class="flex items-center gap-2">
+            <span
+              class="inline-flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.9)]"
+            ></span>
+            <span class="uppercase tracking-[0.18em] text-emerald-200/90">
+              Mode Focus
+            </span>
+          </div>
+
+          <!-- Mood selector -->
+          <div class="relative">
+            <button
+              id="mood-toggle"
+              class="flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] sm:text-xs uppercase tracking-[0.16em] border border-cyan-400/60 text-cyan-100/90 bg-cyan-500/10 hover:bg-cyan-500/20 hover:border-cyan-300/80 shadow-[0_0_14px_rgba(34,211,238,0.45)] transition"
+              type="button"
+            >
+              <span class="hidden sm:inline opacity-80">Mood</span>
+              <span
+                id="mood-current-label"
+                class="font-semibold text-[0.7rem] sm:text-[0.7rem]"
+              >
+                Silence
+              </span>
+            </button>
+
+            <div
+              id="mood-menu"
+              class="hidden absolute right-0 mt-2 w-44 rounded-2xl overflow-hidden bg-slate-900/95 border border-cyan-400/50 shadow-[0_18px_45px_rgba(15,23,42,0.9)] backdrop-blur-xl z-20 text-[11px]"
+            >
+              <!-- Options insérées via JavaScript -->
+            </div>
+          </div>
         </div>
       </header>
 
@@ -239,6 +267,9 @@
         </section>
       </main>
     </div>
+
+    <!-- Audio d'ambiance Lo-Fi -->
+    <audio id="ambient-audio" loop class="hidden"></audio>
 
     <script src="app.js"></script>
   </body>
