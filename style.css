@@ -1,0 +1,126 @@
+/* Fond global Deep Purple & Cyberpunk Sunset */
+ body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background:
+    radial-gradient(circle at 10% 0%, #4c1d95 0, transparent 55%),
+    radial-gradient(circle at 100% 20%, #f97316 0, transparent 55%),
+    radial-gradient(circle at 50% 100%, #1e293b 0, #020617 60%);
+}
+
+/* Carte principale */
+.zen-bg {
+  background: radial-gradient(circle at top left, rgba(244, 63, 94, 0.18), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.16), transparent 60%),
+    linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+  backdrop-filter: blur(22px);
+}
+
+/* Cartes internes */
+.neon-card {
+  background: radial-gradient(circle at top, rgba(244, 63, 94, 0.16), transparent 60%),
+    radial-gradient(circle at bottom, rgba(56, 189, 248, 0.14), transparent 60%),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.99));
+  border: 1px solid rgba(129, 140, 248, 0.35);
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.9),
+    0 0 40px rgba(109, 40, 217, 0.35);
+}
+
+/* Titres néon */
+.neon-title {
+  text-shadow:
+    0 0 12px rgba(244, 114, 182, 0.8),
+    0 0 28px rgba(129, 140, 248, 0.7);
+}
+
+/* Effet néon pour texte */
+.neon-clock-text {
+  text-shadow:
+    0 0 8px rgba(45, 212, 191, 0.7),
+    0 0 20px rgba(8, 47, 73, 0.9);
+}
+
+/* Anneaux lumineux autour des cartes */
+.neon-ring {
+  border-radius: 1.5rem;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+}
+
+/* Horloge */
+.neon-ring-clock {
+  background:
+    conic-gradient(
+      from 180deg,
+      rgba(56, 189, 248, 0.08),
+      rgba(244, 63, 94, 0.35),
+      rgba(56, 189, 248, 0.12),
+      transparent 70%
+    );
+  filter: blur(12px);
+}
+
+/* Pomodoro */
+.neon-ring-pomodoro {
+  background:
+    conic-gradient(
+      from 90deg,
+      rgba(244, 63, 94, 0.12),
+      rgba(249, 115, 22, 0.24),
+      rgba(129, 140, 248, 0.25),
+      rgba(56, 189, 248, 0.22),
+      rgba(244, 63, 94, 0.12)
+    );
+  filter: blur(15px);
+}
+
+/* Notes */
+.neon-ring-notes {
+  background:
+    radial-gradient(circle at top left, rgba(168, 85, 247, 0.3), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.22), transparent 55%);
+  filter: blur(18px);
+}
+
+/* Boutons pomodoro */
+.pomodoro-mode-btn {
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.12s ease,
+    box-shadow 0.18s ease;
+  box-shadow: 0 0 0 transparent;
+}
+
+.pomodoro-mode-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 18px rgba(192, 132, 252, 0.5);
+}
+
+.pomodoro-mode-btn.active {
+  box-shadow:
+    0 0 18px rgba(244, 114, 182, 0.7),
+    0 0 30px rgba(129, 140, 248, 0.7);
+}
+
+/* Transitions texte statut notes */
+#notes-status {
+  transition: color 0.2s ease;
+}
+
+/* Responsive fin */
+@media (max-width: 640px) {
+  .zen-bg {
+    border-radius: 1.75rem;
+  }
+
+  .neon-card {
+    border-radius: 1.5rem;
+  }
+}

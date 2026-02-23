@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Zen Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles custom -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body
+    class="min-h-screen text-slate-100 flex items-center justify-center p-4"
+  >
+    <div
+      class="zen-bg max-w-5xl w-full rounded-3xl shadow-2xl border border-purple-500/40 overflow-hidden"
+    >
+      <!-- En-tête -->
+      <header
+        class="px-6 sm:px-10 py-4 sm:py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4"
+      >
+        <div>
+          <h1
+            class="text-2xl sm:text-3xl font-semibold tracking-[0.2em] uppercase text-fuchsia-300 neon-title"
+          >
+            Zen Dashboard
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-300/80">
+            Deep Purple &amp; Cyberpunk Sunset – focus, temps &amp; notes.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
+          <span
+            class="inline-flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.9)]"
+          ></span>
+          <span class="uppercase tracking-[0.18em] text-emerald-200/90">
+            Mode Focus
+          </span>
+        </div>
+      </header>
+
+      <!-- Contenu principal -->
+      <main
+        class="px-4 sm:px-8 pb-6 sm:pb-10 flex flex-col lg:flex-row gap-6 sm:gap-8"
+      >
+        <!-- Colonne gauche : Horloge + Pomodoro -->
+        <section class="w-full lg:w-1/2 flex flex-col gap-6">
+          <!-- Horloge néon -->
+          <div
+            class="relative rounded-3xl neon-card p-4 sm:p-6 flex flex-col items-center justify-center gap-3"
+          >
+            <div
+              class="absolute inset-0 pointer-events-none neon-ring neon-ring-clock"
+            ></div>
+            <h2
+              class="text-xs sm:text-sm tracking-[0.28em] uppercase text-slate-200/80"
+            >
+              Horloge
+            </h2>
+            <div
+              id="clock"
+              class="font-[Orbitron] text-4xl sm:text-5xl md:text-6xl font-semibold text-cyan-200 neon-clock-text"
+            >
+              00:00:00
+            </div>
+            <div
+              id="clock-date"
+              class="text-xs sm:text-sm text-slate-200/80 tracking-[0.18em] uppercase"
+            >
+              --
+            </div>
+          </div>
+
+          <!-- Pomodoro circulaire -->
+          <div
+            class="relative rounded-3xl neon-card p-4 sm:p-6 flex flex-col items-center justify-center gap-4"
+          >
+            <div
+              class="absolute inset-0 pointer-events-none neon-ring neon-ring-pomodoro"
+            ></div>
+            <div class="flex flex-col items-center gap-2">
+              <h2
+                class="text-xs sm:text-sm tracking-[0.28em] uppercase text-slate-200/80"
+              >
+                Minuteur Pomodoro
+              </h2>
+
+              <!-- Choix des durées -->
+              <div
+                class="flex flex-wrap justify-center gap-2 text-[10px] sm:text-xs"
+              >
+                <button
+                  data-duration="25"
+                  class="pomodoro-mode-btn active border border-fuchsia-400/70 text-fuchsia-100/90 bg-fuchsia-500/10 hover:bg-fuchsia-500/20"
+                >
+                  25 min Focus
+                </button>
+                <button
+                  data-duration="5"
+                  class="pomodoro-mode-btn border border-cyan-400/70 text-cyan-100/90 bg-cyan-500/10 hover:bg-cyan-500/20"
+                >
+                  5 min Pause
+                </button>
+                <button
+                  data-duration="15"
+                  class="pomodoro-mode-btn border border-violet-400/70 text-violet-100/90 bg-violet-500/10 hover:bg-violet-500/20"
+                >
+                  15 min Long break
+                </button>
+              </div>
+            </div>
+
+            <!-- Cadran circulaire -->
+            <div class="relative flex items-center justify-center mt-1">
+              <svg
+                class="w-40 h-40 sm:w-48 sm:h-48 -rotate-90"
+                viewBox="0 0 120 120"
+              >
+                <defs>
+                  <linearGradient
+                    id="pomodoroGradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
+                    <stop offset="0%" stop-color="#22d3ee" />
+                    <stop offset="50%" stop-color="#a855f7" />
+                    <stop offset="100%" stop-color="#fb7185" />
+                  </linearGradient>
+                </defs>
+                <circle
+                  cx="60"
+                  cy="60"
+                  r="50"
+                  class="stroke-slate-700/80"
+                  stroke-width="8"
+                  fill="none"
+                ></circle>
+                <circle
+                  id="pomodoro-progress"
+                  cx="60"
+                  cy="60"
+                  r="50"
+                  stroke="url(#pomodoroGradient)"
+                  stroke-width="8"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-dasharray="314"
+                  stroke-dashoffset="314"
+                  class="drop-shadow-[0_0_15px_rgba(236,72,153,0.9)]"
+                ></circle>
+              </svg>
+
+              <!-- Temps restant -->
+              <div
+                class="absolute inset-0 flex flex-col items-center justify-center text-center"
+              >
+                <span
+                  id="pomodoro-label"
+                  class="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-slate-200/70"
+                >
+                  Focus
+                </span>
+                <span
+                  id="pomodoro-time"
+                  class="font-[Orbitron] text-2xl sm:text-3xl text-rose-200 neon-clock-text mt-1"
+                >
+                  25:00
+                </span>
+              </div>
+            </div>
+
+            <!-- Boutons Pomodoro -->
+            <div class="flex items-center justify-center gap-3 mt-1">
+              <button
+                id="pomodoro-toggle"
+                class="px-5 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wide uppercase bg-rose-500 text-white hover:bg-rose-400 active:bg-rose-600 shadow-[0_0_20px_rgba(244,63,94,0.7)] transition"
+              >
+                Démarrer
+              </button>
+              <button
+                id="pomodoro-reset"
+                class="px-4 py-2 rounded-full text-[10px] sm:text-xs font-medium uppercase tracking-wide border border-slate-500/70 text-slate-100/90 hover:bg-slate-800/60 transition"
+              >
+                Réinitialiser
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Colonne droite : Notes -->
+        <section class="w-full lg:w-1/2 flex flex-col gap-4">
+          <div class="relative rounded-3xl neon-card p-4 sm:p-6 h-full flex flex-col">
+            <div
+              class="absolute inset-0 pointer-events-none neon-ring neon-ring-notes"
+            ></div>
+
+            <div class="flex items-center justify-between gap-2 mb-3 sm:mb-4">
+              <div>
+                <h2
+                  class="text-xs sm:text-sm tracking-[0.28em] uppercase text-slate-200/80"
+                >
+                  Notes Zen
+                </h2>
+                <p class="text-[10px] sm:text-xs text-slate-300/80">
+                  Sauvegarde automatique dans ton navigateur.
+                </p>
+              </div>
+              <button
+                id="notes-clear"
+                class="px-3 py-1.5 rounded-full text-[10px] sm:text-xs uppercase tracking-[0.15em] border border-fuchsia-400/60 text-fuchsia-100/90 hover:bg-fuchsia-500/20 transition"
+              >
+                Effacer
+              </button>
+            </div>
+
+            <textarea
+              id="notes"
+              class="flex-1 min-h-[180px] sm:min-h-[260px] resize-none bg-slate-900/40 border border-slate-700/70 rounded-2xl p-3 sm:p-4 text-xs sm:text-sm text-slate-100/90 focus:outline-none focus:ring-2 focus:ring-fuchsia-500/70 focus:border-transparent placeholder:text-slate-400/70 backdrop-blur-md"
+              placeholder="Écris tes idées, tâches et réflexions ici..."
+            ></textarea>
+
+            <div
+              class="mt-2 flex items-center justify-between text-[10px] sm:text-xs text-slate-300/70"
+            >
+              <span id="notes-status">Synchronisé.</span>
+              <span id="notes-count">0 caractères</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
