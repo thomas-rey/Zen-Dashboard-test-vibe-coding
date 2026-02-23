@@ -213,8 +213,8 @@ loadNotes();
 // ---------- Mood & musique Lo-Fi ----------
 const MOOD_STORAGE_KEY = "zen-dashboard-mood";
 
-// Exemple de sources libres ou à remplacer par tes propres liens
-// Veille simplement à utiliser des musiques libres de droits.
+// Musiques libres (SoundHelix, CC – attribution sur soundhelix.com)
+// Tu peux remplacer par tes propres liens (Pixabay, etc.).
 const MOODS = [
   {
     id: "silence",
@@ -228,8 +228,7 @@ const MOODS = [
     description: "Ambiance chill pour se concentrer",
     source: {
       type: "audio",
-      // Remplace cette URL par un lien direct vers un MP3 libre de droits
-      url: "https://example.com/audio/lofi-chill.mp3"
+      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
     }
   },
   {
@@ -238,8 +237,7 @@ const MOODS = [
     description: "Ambiance nocturne douce",
     source: {
       type: "audio",
-      // Remplace cette URL par un lien direct vers un MP3 libre de droits
-      url: "https://example.com/audio/lofi-night.mp3"
+      url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
     }
   }
 ];
@@ -291,18 +289,21 @@ function setMood(id, options = {}) {
     return;
   }
 
-  const shouldReload = ambientAudio.src !== mood.source.url;
-  if (shouldReload) {
-    ambientAudio.src = mood.source.url;
-  }
+  const newUrl = mood.source.url;
+  const isNewSource = !ambientAudio.src || !ambientAudio.src.includes(newUrl);
 
-  if (autoPlay) {
-    const playPromise = ambientAudio.play();
-    if (playPromise && typeof playPromise.then === "function") {
-      playPromise.catch(() => {
-        // Certains navigateurs bloquent l'autoplay sans interaction
-      });
+  if (isNewSource) {
+    ambientAudio.src = newUrl;
+    if (autoPlay) {
+      const onCanPlay = () => {
+        ambientAudio.removeEventListener("canplay", onCanPlay);
+        ambientAudio.play().catch(() => {});
+      };
+      ambientAudio.addEventListener("canplay", onCanPlay);
+      ambientAudio.load();
     }
+  } else if (autoPlay) {
+    ambientAudio.play().catch(() => {});
   }
 }
 
